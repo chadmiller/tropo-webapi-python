@@ -25,7 +25,7 @@ def index(request):
     t.transfer(TO_NUMBER, _from="tel:+" + FROM_NUMBER)
     t.say("Hi. I am a robot")
     json = t.RenderJson()
-    print json
+    print(json)
     return json
 
 

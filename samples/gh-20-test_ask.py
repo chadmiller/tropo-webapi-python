@@ -19,16 +19,16 @@ def index(request):
 
 	t.on(event = "continue", next ="/continue")
 
-        json = t.RenderJson()
+	json = t.RenderJson()
 
-        print json
+	print(json)
 	return json
 
 @post("/continue")
 def index(request):
 
 	r = Result(request.body)        
-        print "Result : %s" % r
+	print("Result : %s" % r)
 
 	t = Tropo()
 
@@ -37,8 +37,8 @@ def index(request):
 
 	t.say("You said " + answer + ", which is a " + value)
 
-        json = t.RenderJson()
-        print json
+	json = t.RenderJson()
+	print(json)
 	return json
 
 run_itty()

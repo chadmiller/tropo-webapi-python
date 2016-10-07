@@ -11,7 +11,7 @@ def index(request):
 	t.on(event = "continue", next ="/continue")
 	t.on(event = "incomplete", next ="/incomplete")
 	json = t.RenderJson()
-	print json
+	print(json)
 	return json
 
 @post("/continue")
@@ -29,7 +29,7 @@ def index(request):
 		t.say("What are you waiting for?")
 
 	json = t.RenderJson()
-	print json
+	print(json)
 	return json
 
 @post("/incomplete")
@@ -37,7 +37,7 @@ def index(request):
 	t = Tropo()
 	t.say("Sorry, that wasn't on of the options.")
 	json = t.RenderJson()
-	print json
+	print(json)
 	return json
 
 run_itty()

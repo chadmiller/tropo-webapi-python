@@ -47,10 +47,7 @@ as "say". In some cases, you'll want to build a class object directly such as in
 
 ## Note on Python versions
 
-This module is for python 2.x and requires python 2.5 or higher.  
-There is a separate version available for python 3.x at:
-
-      http://github.com/tropo/python-webapi/tree/python3
+This module is for Python 3 and 2.5 or higher.  
 
 ## License
 

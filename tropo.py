@@ -44,6 +44,18 @@ except ImportError:
         except ImportError:
             import json as jsonlib
 
+
+import sys
+
+if sys.version_info < (3,):
+    # In Python 2, we are loosey-goosey with whether we're dealing with
+    # bytestrings or unicode.
+    stringish = basestring
+else:
+    # In Python 3, we require unicode as the deities intended.
+    stringish = str
+
+
 class TropoAction(object):
     """
     Class representing the base Tropo action.
@@ -92,14 +104,14 @@ class Ask(TropoAction):
 
     def __init__(self, choices, **options):
         self._dict = {}
-        if (isinstance(choices, basestring)):
+        if (isinstance(choices, stringish)):
             self._dict['choices'] = Choices(choices).json
         else:
 #            self._dict['choices'] = choices['choices']
             self._dict['choices'] = choices.json
         for opt in self.options_array:
             if opt in options:
-                if ((opt == 'say') and (isinstance(options['say'], basestring))):
+                if ((opt == 'say') and (isinstance(options['say'], stringish))):
                     self._dict['say'] = Say(options['say']).json
                 else:
                     self._dict[opt] = options[opt]
@@ -312,25 +324,25 @@ class On(TropoAction):
         self._dict = {}
         for opt in self.options_array:
             if opt in options:
-                if ((opt == 'say') and (isinstance(options['say'], basestring))):
+                if ((opt == 'say') and (isinstance(options['say'], stringish))):
                     if('voice' in options):
                       self._dict['say'] = Say(options['say'], voice=options['voice']).json
                     else:
                       self._dict['say'] = Say(options['say']).json
              
-                elif ((opt == 'ask') and (isinstance(options['ask'], basestring))):
+                elif ((opt == 'ask') and (isinstance(options['ask'], stringish))):
                   if('voice' in options):
                     self._dict['ask'] = Ask(options['ask'], voice=options['voice']).json
                   else:
                     self._dict['ask'] = Ask(options['ask']).json
               
-                elif ((opt == 'message') and (isinstance(options['message'], basestring))):
+                elif ((opt == 'message') and (isinstance(options['message'], stringish))):
                   if('voice' in options):
                     self._dict['message'] = Message(options['message'], voice=options['voice']).json
                   else:
                     self._dict['message'] = Message(options['message']).json
                 
-                elif ((opt == 'wait') and (isinstance(options['wait'], basestring))):
+                elif ((opt == 'wait') and (isinstance(options['wait'], stringish))):
                   self._dict['wait'] = Wait(options['wait']).json
                   
                 elif(opt != 'voice'):
@@ -375,7 +387,7 @@ class Record(TropoAction):
         self._dict = {'url': url}
         for opt in self.options_array:
             if opt in options:
-                if ((opt == 'say') and (isinstance(options['say'], basestring))):
+                if ((opt == 'say') and (isinstance(options['say'], stringish))):
                     self._dict['say'] = Say(options['say']).json
                 else:
                     self._dict[opt] = options[opt]
@@ -544,7 +556,7 @@ class Transfer(TropoAction):
         if opt in options:
           if opt == "on":
             whisper = []
-            for key, val in options['on'].iteritems():
+            for key, val in options['on'].items():
               newDict = {}
 
               if(key == "ask"):
@@ -683,7 +695,7 @@ class Session(object):
                 setattr(self, "fromaddress", val)
             else:
                 setattr(self, key, val)
-	setattr(self, 'dict', session_dict)
+        setattr(self, 'dict', session_dict)
 
 
 class Tropo(object):
@@ -716,8 +728,8 @@ class Tropo(object):
 # # **Sun May 15 21:21:29 2011** -- egilchri
 
         # Settng the voice in this method call has priority.
-	# Otherwise, we can pick up the voice from the Tropo object,
-	# if it is set there.
+        # Otherwise, we can pick up the voice from the Tropo object,
+        # if it is set there.
         if hasattr (self, 'voice'):
             if (not 'voice' in options):
                 options['voice'] = self.voice
@@ -761,7 +773,7 @@ class Tropo(object):
         Argument: **options is a set of optional keyword arguments.
         See https://www.tropo.com/docs/webapi/message
         """
-        if isinstance(say_obj, basestring):
+        if isinstance(say_obj, stringish):
             say = Say(say_obj).obj
         else:
             say = say_obj
@@ -818,8 +830,8 @@ class Tropo(object):
 # # **Sun May 15 21:21:29 2011** -- egilchri
 
         # Settng the voice in this method call has priority.
-	# Otherwise, we can pick up the voice from the Tropo object,
-	# if it is set there.
+        # Otherwise, we can pick up the voice from the Tropo object,
+        # if it is set there.
         if hasattr (self, 'voice'):
             if (not 'voice' in options):
                 options['voice'] = self.voice
@@ -878,16 +890,17 @@ class Tropo(object):
         return json
 
 if __name__ == '__main__':
-    print """
+    print("""
 
  This is the Python web API for http://www.tropo.com/
 
  To run the test suite, please run:
 
     cd test
-    python test.py
+    python2 test.py
+    python3 test.py
 
 
-"""
+""")
 
 

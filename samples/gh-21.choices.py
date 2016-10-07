@@ -20,21 +20,21 @@ def index(request):
 
 	t = Tropo()
 
-        choices = Choices("[4-5 DIGITS]", mode="dtmf", terminator = "#")
+	choices = Choices("[4-5 DIGITS]", mode="dtmf", terminator = "#")
 	t.ask(choices, timeout=15, name="digit", say = "What's your four or five digit pin? Press pound when finished.")
 
 	t.on(event = "continue", next ="/continue")
 
-        json = t.RenderJson()
+	json = t.RenderJson()
 
-        print json
+	print(json)
 	return json
 
 @post("/continue")
 def index(request):
 
 	r = Result(request.body)        
-        print "Result : %s" % r
+        print("Result : %s" % r)
 #        dump(r)
 	t = Tropo()
 
@@ -43,8 +43,8 @@ def index(request):
 	t.say("You said ")
 	t.say (answer, _as="DIGITS")
 
-        json = t.RenderJson()
-        print json
+	json = t.RenderJson()
+	print(json)
 	return json
 
 run_itty()

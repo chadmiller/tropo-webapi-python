@@ -35,7 +35,7 @@ def index(request):
 
 
     json = t.RenderJson()
-    print json
+    print(json)
     return json
 
 

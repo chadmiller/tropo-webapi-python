@@ -16,6 +16,7 @@
 #   3. Place this file in examples folder and chmod it executable
 #   4. Dial up Tropo app, and hear "Hello, World ..."
 
+from __future__ import print_function
 import cgi
 from tropo import Tropo
 
@@ -23,14 +24,14 @@ def hello():
     t = Tropo()
     t.say(['hello world! I am a C G I script.'])
     json = t.RenderJson()
-    print json
+    print(json)
     return json
 
 
 
-print "Content-type: text/json"
-print
-print 
+print("Content-type: text/json")
+print()
+print()
 
 hello()
 

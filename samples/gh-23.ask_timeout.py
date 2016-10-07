@@ -25,7 +25,7 @@ def index (request):
                  ])   
 
     json = t.RenderJson()
-    print json
+    print(json)
     return json
 
 
@@ -67,7 +67,7 @@ def index_straight_json (request):
 
 }
 """
-    print json
+    print(json)
     return json
 
 

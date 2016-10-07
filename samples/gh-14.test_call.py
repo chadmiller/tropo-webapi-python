@@ -23,7 +23,7 @@ def index(request):
     t.call(to='tel:+' + TO_NUMBER, _from='tel:+' + FROM_NUMBER)
     t.say('This is your mother. Did you brush your teeth today?')
     json = t.RenderJson()
-    print json
+    print(json)
     return json
 
 

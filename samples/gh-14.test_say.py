@@ -17,7 +17,7 @@ def index(request):
     t = Tropo()
     t.say('12345', _as='DIGITS', voice='dave')
     json = t.RenderJson()
-    print json
+    print(json)
     return json
 
 
