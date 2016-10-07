@@ -8,6 +8,8 @@
 # Sample application using the itty-bitty python web framework from:
 #  http://github.com/toastdriven/itty
 
+from __future__ import print_function
+
 from itty import *
 from tropo import Tropo, Session, TropoAction, Choices
 

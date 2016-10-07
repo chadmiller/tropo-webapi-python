@@ -31,6 +31,8 @@ NOTE: This module requires python 2.5 or higher.
 
 """
 
+from __future__ import print_function
+
 try:
     import cjson as jsonlib
     jsonlib.dumps = jsonlib.encode

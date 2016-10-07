@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 from itty import *
 from tropo import Tropo, Session, Result
 

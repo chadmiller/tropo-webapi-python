@@ -17,6 +17,7 @@
 #   4. Dial up Tropo app, and hear "Hello, World ..."
 
 from __future__ import print_function
+
 import cgi
 from tropo import Tropo
 
