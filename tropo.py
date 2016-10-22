@@ -86,18 +86,18 @@ class Ask(TropoAction):
             "allowSignals": String or Array,
             "bargein": Boolean,
             "choices": Object, #Required
-            "interdigitTimeout": Float, 
-            "minConfidence": Integer, 
+            "interdigitTimeout": Float,
+            "minConfidence": Integer,
             "name": String,
             "recognizer": String,
             "required": Boolean,
             "say": Object,
-            "sensitivity": Float, 
-            "speechCompleteTimeout": Float, 
+            "sensitivity": Float,
+            "speechCompleteTimeout": Float,
             "speechIncompleteTimeout": Float,
             "timeout": Float,
             "voice": String,
-             
+
              } }
 
     """
@@ -153,7 +153,7 @@ class Call(TropoAction):
                 else:
                     self._dict[opt] = options[opt]
 
-                
+
 
 class Choices(TropoAction):
     """
@@ -331,25 +331,25 @@ class On(TropoAction):
                       self._dict['say'] = Say(options['say'], voice=options['voice']).json
                     else:
                       self._dict['say'] = Say(options['say']).json
-             
+
                 elif ((opt == 'ask') and (isinstance(options['ask'], stringish))):
                   if('voice' in options):
                     self._dict['ask'] = Ask(options['ask'], voice=options['voice']).json
                   else:
                     self._dict['ask'] = Ask(options['ask']).json
-              
+
                 elif ((opt == 'message') and (isinstance(options['message'], stringish))):
                   if('voice' in options):
                     self._dict['message'] = Message(options['message'], voice=options['voice']).json
                   else:
                     self._dict['message'] = Message(options['message']).json
-                
+
                 elif ((opt == 'wait') and (isinstance(options['wait'], stringish))):
                   self._dict['wait'] = Wait(options['wait']).json
-                  
+
                 elif(opt != 'voice'):
                     self._dict[opt] = options[opt]
-                    
+
         self._dict['event'] = event
 
 class Record(TropoAction):
@@ -379,7 +379,7 @@ class Record(TropoAction):
             "say": Object,
             "timeout": Float,
             "transcription": Array or Object,
-            "url": String, #Required 
+            "url": String, #Required
             "username": String,
             "voice": String} }
     """
@@ -496,7 +496,7 @@ class StartRecording(TropoAction):
         "method": String,
         "url": String,#Required
         "username": String,
-        "password": String, 
+        "password": String,
         "transcriptionID": String
         "transcriptionEmailFormat":String
         "transcriptionOutURI": String} }
@@ -576,7 +576,7 @@ class Transfer(TropoAction):
               elif(key == "message"):
                 newDict['message'] = val
                 newDict['event'] = 'connect'
-            
+
               elif(key == "ring"):
                 newDict['say'] = val
                 newDict['event'] = 'ring'
@@ -603,7 +603,7 @@ class Wait(TropoAction):
           "milliseconds": Integer,#Required
           "allowSignals": String or Array
       """
-      
+
       action = 'wait'
       options_array = ['allowSignals']
 
@@ -684,7 +684,7 @@ class Session(object):
     """
     Session is the payload sent as an HTTP POST to your web application when a new session arrives.
     (See https://www.tropo.com/docs/webapi/session)
-    
+
     Because 'from' is a reserved word in Python, the session object's 'from' property is called
     fromaddress in the Python library
     """
@@ -735,7 +735,7 @@ class Tropo(object):
         if hasattr (self, 'voice'):
             if (not 'voice' in options):
                 options['voice'] = self.voice
-        
+
 # # **Sun May 15 21:21:29 2011** -- egilchri
 
         self._steps.append(Ask(choices, **options).obj)
@@ -865,7 +865,7 @@ class Tropo(object):
         See https://www.tropo.com/docs/webapi/transfer
         """
         self._steps.append(Transfer(to, **options).obj)
-        
+
     def wait(self, milliseconds, **options):
       """
       Allows the thread to sleep for a given amount of time in milliseconds
@@ -874,7 +874,7 @@ class Tropo(object):
       See https://www.tropo.com/docs/webapi/wait
       """
       self._steps.append(Wait(milliseconds, **options).obj)
-      
+
     def RenderJson(self, pretty=False):
         """
         Render a Tropo object into a Json string.
@@ -904,5 +904,3 @@ if __name__ == '__main__':
 
 
 """)
-
-
